@@ -12,6 +12,7 @@ type config struct {
 	client              internal.Client
 	nextLocationUrl     *string
 	previousLocationUrl *string
+	cache internal.PokeCache
 }
 
 
@@ -71,11 +72,21 @@ func getCommand() map[string]cliCommand {
 			description: "Get next location",
 			callback:    commandMap,
 		},
+		"mapb":{
+			name: "map back",
+			description: "Get previous locations",
+			callback: commandMapB,
+		},
 
 		"exit": {
 			name:        "exit",
 			description: "Ends program",
 			callback:    commandExit,
+		},
+		"cache": {
+			name:        "cache",
+			description: "show cache",
+			callback:    cache,
 		},
 	}
 }

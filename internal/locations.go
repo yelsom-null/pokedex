@@ -2,8 +2,10 @@ package internal
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
+
 )
 
 func (c *Client) GetLocations(pageUrl *string) (Poke, error) {
@@ -12,6 +14,8 @@ func (c *Client) GetLocations(pageUrl *string) (Poke, error) {
 	if pageUrl != nil {
 		url = *pageUrl
 	}
+
+	
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return Poke{}, err
@@ -23,10 +27,15 @@ func (c *Client) GetLocations(pageUrl *string) (Poke, error) {
 	}
 	defer resp.Body.Close()
 
+
+
+	
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return Poke{}, err
 	}
+	fmt.Printf("Adding %v to cache\n",url)
+
 
 	var locationsResp Poke
 	err = json.Unmarshal(data, &locationsResp)
