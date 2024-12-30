@@ -9,7 +9,7 @@ import (
 
 
 func main() {
-	interval := time.Duration(100*time.Second)
+	interval := time.Duration(5*time.Second)
 	clientPoke := internal.NewClient()
 	cache := internal.NewCache(interval)
 	cfg := &config{
